@@ -1,6 +1,9 @@
 {% extends "food_mgt/base.html" %}
+{% load socialaccount %} 
+{% providers_media_js %}
+
 {% load crispy_forms_tags %}
-{%block content %}
+{% block content %}
     <div class="content-section">
         <form method="POST">
             {% csrf_token %}
@@ -13,6 +16,12 @@
                 <small class="text-muted ml-2">
                     <a href="{% url 'password_reset' %}"> Forgot Password </a>
                 </small>
+                
+                <div class="form-group">
+                    <br>
+                    <a href ="{%  provider_login_url 'google' method = 'oauth2' %}">Sign In with Google</a>
+                </div>
+
 
             </div>
         </form>

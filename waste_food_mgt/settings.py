@@ -36,12 +36,17 @@ INSTALLED_APPS = [
     'food_mgt.apps.FoodMgtConfig',
     'users.apps.UsersConfig',
     'django.contrib.admin',
+    'django.contrib.sites',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
+    "allauth", # <--
+   "allauth.account", # <--
+   "allauth.socialaccount", # <--
+   "allauth.socialaccount.providers.google",
 ]
 
 MIDDLEWARE = [
@@ -132,3 +137,22 @@ LOGIN_REDIRECT_URL = 'blog-home'
 LOGIN_URL = 'login'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
+
+AUTHENTICATION_BACKENDS = (
+   "django.contrib.auth.backends.ModelBackend",
+   "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+SITE_ID = 1
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
